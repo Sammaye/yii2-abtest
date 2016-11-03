@@ -73,7 +73,7 @@ class Test extends Component
 		return $active;
     }
     
-    public function list()
+    public function list($allActions = false)
     {
         $session = Yii::$app->getSession();
         $list = [];
@@ -87,6 +87,24 @@ class Test extends Component
             if($sessionTest && is_array($sessionTest)){
                 $test = $this->getTest($sessionTest[0]);
                 unset($test['values']);
+                
+                if(!$allActions && isset($test['action'])){
+                    $currentAction = Yii::$app->controller->id . '/' 
+                        . Yii::$app->controller->action->id;    
+                    
+                    if(
+                        is_array($test['action']) && 
+                        !in_array($currentAction, $test['action'])
+                    ){
+                        continue;
+                    }elseif(
+                        !is_array($test['action']) && 
+                        $currentAction !== $test['action']
+                    ){
+                        continue;
+                    }
+                }
+                
                 if($test){
                     $list[$name] = array_merge(
                         $test, 
