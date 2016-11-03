@@ -12,7 +12,7 @@ Simply include it from composer:
 
 ## Adding it to your configuration
 
-Easiest thing is to just show example of my configuration:
+Easiest thing is to just show an example of my configuration:
 
 	'test' => [
 		'class' => 'sammaye\abtest\Test',
