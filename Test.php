@@ -57,6 +57,7 @@ class Test extends Component
                 )
             );
             if(!$this->can($o)){
+                $session->remove($key);
                 return $test['default'];
             }
         }
