@@ -85,7 +85,10 @@ class Test extends Component
             
             $sessionTest = $session->get($this->key($name));
             if($sessionTest && is_array($sessionTest)){
-                $list[$name] = $sessionTest[1];
+                $test = $this->getTest($sessionTest[0]);
+                if($test){
+                    $list[$name] = $test;
+                }
             }
         }
         return $list;
