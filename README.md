@@ -60,7 +60,12 @@ In order to add it to your analytics code you need to list all active tests and 
 This will then print out a list of (for me):
 
     [
-        'Old Search' => 'new'
+        'Old Search' => [
+        	'name' => 'Old Search',
+        	'value' => 'old' // active
+        	// custom data could be housed 
+        	// here from the configuration like "goal"
+        ]
     ]
 
-So, the key is name of the test and the value is the selected variant of the test.
+So, the key is name of the test and the value is the configuration object but with `values` replaced with only the active `value`.
