@@ -49,12 +49,12 @@ class Test extends Component
             $filter['rules'][] = ['allow' => true];
             
             $o = Yii::createObject(
-            array_merge(
-            [
-            'class' => AccessControl::class, 
-            ], 
-            $filter
-            )
+                array_merge(
+                    [
+                        'class' => AccessControl::class, 
+                    ], 
+                    $filter
+                )
             );
             if(!$this->can($o)){
                 $session->remove($key);
