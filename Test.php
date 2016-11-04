@@ -29,14 +29,14 @@ class Test extends Component
             throw new Exception('Test "' . $name . '" is not in configuration');
         }
         
-		$session = Yii::$app->getSession();
-		$key = $this->key($name);
-		
-		if(!isset($test['values']) || !is_array($test['values'])){
+        $session = Yii::$app->getSession();
+        $key = $this->key($name);
+        
+        if(!isset($test['values']) || !is_array($test['values'])){
             throw new Exception('Test "' . $name . '" requires an array of values');
-		}
-		$values = $test['values'];
-
+        }
+        $values = $test['values'];
+        
         $filter = isset($test['filter']) ? $test['filter'] : $this->filter;
         if($filter){
             if(!isset($test['default'])){
@@ -44,33 +44,33 @@ class Test extends Component
                     'Test "' . $name . '" requires a "default" parameter and value'
                 );
             }
-            
+        
             // Add a default rule for allowing it all
             $filter['rules'][] = ['allow' => true];
             
             $o = Yii::createObject(
-                array_merge(
-                    [
-                        'class' => AccessControl::class, 
-                    ], 
-                    $filter
-                )
+            array_merge(
+            [
+            'class' => AccessControl::class, 
+            ], 
+            $filter
+            )
             );
             if(!$this->can($o)){
                 $session->remove($key);
                 return $test['default'];
             }
         }
-
-		$active = $session->get($key);
-		
-		if(!$active || !in_array($active, $values)){
-		    // Pick a test randomly
-			$active = $values[array_rand($values)];
-			$session->set($key, [$name, $active]);
-		}
-		
-		return $active;
+        
+        $active = $session->get($key);
+        
+        if(!$active || !in_array($active, $values)){
+            // Pick a test randomly
+            $active = $values[array_rand($values)];
+            $session->set($key, [$name, $active]);
+        }
+        
+        return $active;
     }
     
     public function list($allActions = false)
