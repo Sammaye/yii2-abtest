@@ -73,7 +73,7 @@ class Test extends Component
         return $active;
     }
     
-    public function list($allActions = false)
+    public function listTests($allActions = false)
     {
         $session = Yii::$app->getSession();
         $list = [];
