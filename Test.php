@@ -62,7 +62,11 @@ class Test extends Component
             }
         }
         
-        $active = $session->get($key);
+        $stored = $session->get($key);
+        $active = null;
+        if ($stored && is_array($stored)) {
+            $active = $stored[1];
+        }
         
         if(!$active || !in_array($active, $values)){
             // Pick a test randomly
